@@ -1,311 +1,243 @@
-//Variables for counter and countdown
+//Create variable for counter and set at 72 seconds
 
-var count = 60;
+var count = 72;
 
+//Create variables for keeping score and set to 0
 var correctCount = 0;
 
 var wrongCount = 0;
 
 var unansweredCount = 0;
 
-$(document).ready(function() {
+//
+$(document).ready(function(){
 
-        $("mid_game_container").hide();
+	// TimeOut page after 1 minute
+	//setTimeout(timeUp, limit); <--- worked around it with a hack (count = 0 manaul set)
 
-        $("#end_container").hide();
 
-    $("#start_button").on("click", function() {
 
-        $("start_container").hide();
+	// Intialize the game with hidden Divs
+	$("#mid_game_container").hide();
+	$("#end_container").hide();
 
-        $("#mid_game_container").show();
+	
 
-    startCountdown();
-    return;
+	// Set Scroll position so it looks good
+	window.scrollTo(0, 500);
 
-    });
 
-        function countdown() {
 
-            count--;
 
-        $("timer-number").html(count + " Seconds");
+	$("#start_button").on("click", function(){
 
-        $("#done_button").on("click", function() {
+		// Hide the start Div from the user
+		$("#start_container").hide();
 
-            count = 0;
 
-        return;
-    
-        });
+		// Show the Game Div
+		$("#mid_game_container").show();
 
-        if (count == -1) {
+		startCountdown();
+		return;
 
-            timeup();
+	});
 
-        $("#mid_game_container").hide();
 
-        }
 
-    }
+	// Counts down and displays the time to the user
+	function countdown(){
 
-        function startCountdown() {
+		// Decrement the counter, down from 60 seconds
+		count--;
 
-            setInterval(countdown, 1000);
-        
-     }
+		// Display the count to the user in the DOM
+    	$('#timer_number').html(count + " Seconds");
 
-        function timeUp() {
+    	
 
-    
-    var Q1 = $('input:radio[name="question_1"]:checked').val();
+    	// ----------- Handle Cases for Time ar 0 Seconds -----------
+			// User finishes before time is up and clicks done
+			$("#done_button").on("click", function(){
 
-    var Q1 = $('input:radio[name="question_2"]:checked').val();
+			// Stop the countdown and run the timeUp function
+			//clearInterval(startCountdown);
+			count = 0; // <---- Needed a hack since I couldn't get the clearInterval function to work... It's been a long week :/
+			return;
 
-    var Q1 = $('input:radio[name="question_3"]:checked').val();
+			});
 
-    var Q1 = $('input:radio[name="question_4"]:checked').val();
 
-    var Q1 = $('input:radio[name="question_5"]:checked').val();
+			// Finish the game after the timer reaches 0
+			if(count == -1){
 
-    var Q1 = $('input:radio[name="question_6"]:checked').val();
+				// Collect the radio inputs
+				timeUp();
 
-    var Q1 = $('input:radio[name="question_7"]:checked').val();
+				// Hide the game Div from the user
+				$("#mid_game_container").hide();
 
-    var Q1 = $('input:radio[name="question_8"]:checked').val();
+			}
 
-    var Q1 = $('input:radio[name="question_9"]:checked').val();
 
-    var Q1 = $('input:radio[name="question_10"]:checked').val();
+	}
 
-    var Q1 = $('input:radio[name="question_11"]:checked').val();
 
-    var Q1 = $('input:radio[name="question_12"]:checked').val();
+	// Show the countdown, increment is 1 second
+	function startCountdown(){
 
-        if (Q1 == undefined) {
+		setInterval(countdown, 1000);
 
-            unansweredCount++;
-        
-        }
+	}
 
-        else if (Q1 == "Cavalcade of Stars") {
 
-            correctCount++;
+	// Function to be run after the timer is up
+	function timeUp(){
 
-        }
-        
-        else {
 
-            wrongCount++;
+		// Checked values of Radio Buttons
+		var Q1 = $('input:radio[name="q1"]:checked').val();
+		var Q2 = $('input:radio[name="q2"]:checked').val();
+		var Q3 = $('input:radio[name="q3"]:checked').val();
+		var Q4 = $('input:radio[name="q4"]:checked').val();
+		var Q5 = $('input:radio[name="q5"]:checked').val();
+		var Q6 = $('input:radio[name="q6"]:checked').val();
+		var Q7 = $('input:radio[name="q7"]:checked').val();
+		var Q8 = $('input:radio[name="q8"]:checked').val();
+		var Q9 = $('input:radio[name="q9"]:checked').val();
+		var Q10 = $('input:radio[name="q10"]:checked').val();
 
-        }
 
-        if (Q2 == undefined) {
 
-            unansweredCount++;
-        
-        }
-
-        else if (Q2 == "DuMont") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }  
-
-        if (Q3 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q3 == "1951") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q4 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q4 == "Pert Kelton") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q5 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q5 == "1955") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q6 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q6 == "CBS") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q7 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q7 == "Saturday, at 8:30 p.m. EST") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q8 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q8 == "39") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q9 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q9 == "TV or Not TV") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q10 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q10 == "A Man's Pride") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q11 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q11 == "$65,000") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-        if (Q12 == undefined) {
-
-            unansweredCount++;
-        
-        }
-
-        else if (Q12 == "Audrey Meadows") {
-
-            correctCount++;
-
-        }
-        
-        else {
-
-            wrongCount++;
-
-        }
-
-    $("#correctAnswers").html(correctCount);
-
-    $("#wrong_answers").html(wrongCount);
-
-    $("#unanswered").html(unansweredCount);
-
-    $("#end_containter").show();
-
-    }
+		// Determine the right/wrong/unanswered counts ( This count be a lot more DRY :/ )
+		if(Q1 == undefined){
+			unansweredCount++;
+		}
+		else if(Q1 == "1776"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q2 == undefined){
+			unansweredCount++;
+		}
+		else if(Q2 == "Queens College"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q3 == undefined){
+			unansweredCount++;
+		}
+		else if(Q3 == "The Daily Targum"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q4 == undefined){
+			unansweredCount++;
+		}
+		else if(Q4 == "Over 48,000"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q5 == undefined){
+			unansweredCount++;
+		}
+		else if(Q5 == "University Drive"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q6 == undefined){
+			unansweredCount++;
+		}
+		else if(Q6 == "Princeton"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q7 == undefined){
+			unansweredCount++;
+		}
+		else if(Q7 == "Jersey City"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q8 == undefined){
+			unansweredCount++;
+		}
+		else if(Q8 == "Cook/Douglass"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q9 == undefined){
+			unansweredCount++;
+		}
+		else if(Q9 == "$11,750"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+
+		if(Q10 == undefined){
+			unansweredCount++;
+		}
+		else if(Q10 == "Over 1,700"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+
+
+		// After answers are validated, display the score results
+		$('#correct_answers').html(correctCount);
+		$('#wrong_answers').html(wrongCount);
+		$('#unanswered').html(unansweredCount);
+
+
+		// Show the completed Score Div
+		$("#end_container").show();
+
+
+		// Set Scroll position so it looks good
+		window.scrollTo(0, 550);
+
+	}
 
 });
+
+

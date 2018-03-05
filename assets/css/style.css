@@ -2,4 +2,12 @@ body {
 
     background: url("../images/Honeymooners_Background.jpg");
 
+    background-attachment: fixed;
+
+}
+
+#h_mid_game {
+
+    float: right;
+
 }

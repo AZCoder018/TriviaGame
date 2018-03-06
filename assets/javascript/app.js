@@ -21,10 +21,6 @@ $(document).ready(function(){
     
 	$("#end_container").hide();
 
-
-	// Set Scroll position so it looks good
-    window.scrollTo(0, 500);
-    
 //What happens when user pushes the start button; start container disappears and game questions container appers
 
 $("#start_button").on("click", function(){
@@ -302,10 +298,6 @@ $("#start_button").on("click", function(){
  // Show the completed scoreboard container 
         
 		$("#end_container").show();
-
-
-		// Set Scroll position so it looks good
-		window.scrollTo(0, 550);
 
 	}
 
